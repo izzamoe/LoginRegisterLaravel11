@@ -5,24 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use \Illuminate\Http\RedirectResponse;
+
 
 class AuthControllers extends Controller
 {
 
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('home');
+            return redirect()->route('dashboard.home');
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
+
     //
-    public function register(Request $request)
+    public function register(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -38,13 +41,30 @@ class AuthControllers extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard.home');
+
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         Auth::logout();
 
-        return redirect()->route('login');
+        return redirect()->route('auth.login');
+    }
+
+    public function CheckLogin(): RedirectResponse
+    {
+        return auth()->check() ? redirect()->route('dashboard.home') : redirect()->route('auth.login');
+    }
+//    register
+//    login
+    public function RegisterPage()
+    {
+        return view('register');
+    }
+
+    public function LoginPage()
+    {
+        return view('login');
     }
 }

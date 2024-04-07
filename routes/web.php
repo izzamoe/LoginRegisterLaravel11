@@ -1,26 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthControllers;
+use App\Http\Controllers\HomeControllers;
+
+Route::get('/', [AuthControllers::class, 'CheckLogin']);
 
 
-
-
-Route::get('/', function () {
-    return redirect()->route('login');
+Route::group(['prefix' => '/auth', "as" => "auth."], function () {
+    Route::get('/login', [AuthControllers::class, 'LoginPage'])->name('login');
+    Route::post('/login', [AuthControllers::class, 'login']);
+    Route::get('/register', [AuthControllers::class, 'RegisterPage'])->name('register');
+    Route::post('/register', [AuthControllers::class, 'register']);
 });
-
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-Route::post('/login', 'App\Http\Controllers\AuthControllers@login');
-
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
-
-Route::post('/register', 'App\Http\Controllers\AuthControllers@register');
-
-Route::get('/home', 'App\Http\Controllers\HomeControllers@index')->name('home');
-
-Route::post('/logout', 'App\Http\Controllers\AuthControllers@logout')->name('logout');
+Route::group(['prefix' => "dashboard", "as" => "dashboard."], function () {
+    Route::get('/', [HomeControllers::class, 'index'])->name('home');
+    Route::get('/logout', [AuthControllers::class, 'logout'])->name('logout');
+});
