@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use \Illuminate\Http\RedirectResponse;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 
 class AuthControllers extends Controller
 {
@@ -58,12 +58,12 @@ class AuthControllers extends Controller
     }
 //    register
 //    login
-    public function RegisterPage()
+    public function RegisterPage(): View
     {
         return view('register');
     }
 
-    public function LoginPage()
+    public function LoginPage(): View
     {
         return view('login');
     }
