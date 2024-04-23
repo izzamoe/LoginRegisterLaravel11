@@ -20,7 +20,7 @@ class AuthControllers extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Kredensial yang diberikan tidak cocok dengan catatan kami.',
         ]);
     }
 
@@ -31,6 +31,15 @@ class AuthControllers extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:1',
+        ], [
+            'name.required' => 'Nama diperlukan.',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'email.required' => 'Email diperlukan.',
+            'email.email' => 'Email harus valid.',
+            'email.unique' => 'Email sudah digunakan.',
+            'password.required' => 'Password diperlukan.',
+            'password.confirmed' => 'Password dan konfirmasi password harus cocok.',
+            'password.min' => 'Password harus setidaknya 1 karakter.',
         ]);
 
         $user = User::create([
