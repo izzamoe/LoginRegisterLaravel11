@@ -1,0 +1,40 @@
+{
+    "menu": [
+        {
+            "menuHeader": "Toko"
+        },
+        {
+            "url": "/",
+            "name": "Store",
+            "icon": "menu-icon tf-icons mdi mdi-store-outline",
+            "slug": "dashboard.store"
+        },
+        {
+            "menuHeader": "Pengguna"
+        },
+        {
+            "url": "/dashboard/user",
+            "name": "Users",
+            "icon": "menu-icon tf-icons mdi mdi-account-edit-outline",
+            "slug": "dashboard.user"
+        },
+        {
+            "menuHeader": "Library"
+        },
+        {
+            "url": "/dashboard/library",
+            "name": "Gameku",
+            "icon": "menu-icon tf-icons mdi mdi-nintendo-game-boy",
+            "slug": "dashboard.library"
+        },
+        {
+            "menuHeader": "Keluar"
+        },
+        {
+            "url": "/dashboard/logout",
+            "name": "Logout",
+            "icon": "menu-icon tf-icons mdi mdi-logout-outline",
+            "slug": "dashboard.logout"
+        }
+    ]
+}

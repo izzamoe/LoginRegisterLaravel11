@@ -16,9 +16,8 @@ class AuthControllers extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard.home');
+            return redirect()->route('dashboard.store');
         }
-
         return back()->withErrors([
             'email' => 'Kredensial yang diberikan tidak cocok dengan catatan kami.',
         ]);
@@ -48,9 +47,9 @@ class AuthControllers extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        Auth::login($user);
+//        Auth::login($user);
 
-        return redirect()->route('dashboard.home');
+        return redirect()->route('auth.login');
 
     }
 
@@ -63,7 +62,7 @@ class AuthControllers extends Controller
 
     public function CheckLogin(): RedirectResponse
     {
-        return auth()->check() ? redirect()->route('dashboard.home') : redirect()->route('auth.login');
+        return auth()->check() ? redirect()->route('dashboard.store') : redirect()->route('auth.login');
     }
 //    register
 //    login
