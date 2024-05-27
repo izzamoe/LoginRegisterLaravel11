@@ -68,4 +68,10 @@ class UserSettingsControllers extends Controller
         return back()->with('success', 'Password successfully changed');
     }
 
+    public function library()
+    {
+        $games = auth()->user()->historybuys()->with('produk')->get();
+        return view('library', compact('games'));
+    }
+
 }

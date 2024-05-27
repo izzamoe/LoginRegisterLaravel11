@@ -22,6 +22,10 @@ Route::group(['prefix' => "dashboard", "as" => "dashboard.", "middleware" => IsL
     Route::post('/user', [UserSettingsControllers::class, 'update'])->name('user.update');
     Route::delete('/user', [UserSettingsControllers::class, 'destroy'])->name('user.destroy');
     Route::post('/user/password', [UserSettingsControllers::class, 'changePassword'])->name('user.password');
+
+    Route::get('/library', [UserSettingsControllers::class, 'library'])->name('library');
+//
+
     Route::get('/logout', [AuthControllers::class, 'logout'])->name('logout');
 
 //    payment
