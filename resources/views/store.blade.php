@@ -31,7 +31,11 @@
                         <p class="flex-grow-1">{{ $product->desc }}</p>
                         <h4 class="text-primary mb-1">Rp.{{ number_format($product->price, 2) }}</h4>
                         <p class="mb-2 pb-1"></p>
-                        <a href="javascript:;" class="btn btn-sm btn-primary mt-auto">View Detail</a>
+                        <form action="{{ route('dashboard.buy') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="produk_id" value="{{ $product->id }}">
+                            <button type="submit" class="btn btn-sm btn-primary mt-auto">Buy</button>
+                        </form>
                     </div>
                     <img src="{{asset('assets/img/icons/misc/triangle-light.png')}}"
                          class="scaleX-n1-rtl position-absolute bottom-0 end-0" width="166" alt="triangle background">

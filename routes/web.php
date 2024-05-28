@@ -18,6 +18,7 @@ Route::group(['prefix' => '/auth', "as" => "auth."], function () {
 Route::group(['prefix' => "dashboard", "as" => "dashboard.", "middleware" => IsLogin::class], function () {
 //    Route::get('/', [HomeControllers::class, 'index'])->name('home');
     Route::get('/', [HomeControllers::class, 'index'])->name('store');
+    Route::post('/buy', [HomeControllers::class, 'buy'])->name('buy');
     Route::get('/user', [UserSettingsControllers::class, 'index'])->name('user');
     Route::post('/user', [UserSettingsControllers::class, 'update'])->name('user.update');
     Route::delete('/user', [UserSettingsControllers::class, 'destroy'])->name('user.destroy');
