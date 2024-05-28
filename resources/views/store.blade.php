@@ -15,6 +15,51 @@
 @endsection
 
 @section('content')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            @if (session('success'))
+            var successToastEl = document.querySelector('#successToast');
+            var successToast = new bootstrap.Toast(successToastEl);
+
+            // Set the success message
+            successToastEl.querySelector('.toast-body').textContent = '{{ session('success') }}';
+
+            // Show the toast
+            successToast.show();
+            @endif
+
+            @if ($errors->any())
+            var errorToastEl = document.querySelector('#errorToast');
+            var errorToast = new bootstrap.Toast(errorToastEl);
+
+            // Set the error message
+            errorToastEl.querySelector('.toast-body').textContent = '{{ $errors->first() }}';
+
+            // Show the toast
+            errorToast.show();
+            @endif
+        });
+    </script>
+
+    <div id="successToast" class="toast" style="position: fixed; top: 60px; right: 20px; z-index: 9999;">
+        <div class="toast-header">
+            <strong class="me-auto mdi mdi-check-circle text-success me-2">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ session('success') }}
+        </div>
+    </div>
+
+    <div id="errorToast" class="toast" style="position: fixed; top: 120px; right: 20px; z-index: 9999;">
+        <div class="toast-header">
+            <strong class="me-auto mdi mdi-alert-circle text-danger me-2">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ $errors->first() }}
+        </div>
+    </div>
 
 <style>
     .rounded-circle {
